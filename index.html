@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas</title>
+</head>
+<body>
+	<canvas id="canvas" style="border: 1px solid #aaa;display:block;margin: 50px auto;">
+		当前浏览器不支持Canvas
+	</canvas>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			var canvas=document.getElementById('canvas');
+			canvas.width=600;
+			canvas.height=400;
+			if (canvas.getContext("2d")) {
+				var context=canvas.getContext("2d");
+			}else{
+				alert('Not Support Canvas');
+			}
+			// use context to draw a line
+			context.beginPath();
+			context.moveTo(100,100);
+			context.lineTo(300,300);
+			context.lineTo(100,300);
+			context.lineTo(100,100);
+			context.closePath(); //auto connect begin point and end point to make it closed
+
+			// line style
+			context.lineWidth=5;
+			context.strokeStyle="blue";
+			context.stroke();	//only one stroke works unless use beginPath
+			// fill style
+			context.fillStyle="red";
+			context.fill();	//always fill a closed shape
+
+			context.beginPath();
+			context.moveTo(200,100);
+			context.lineTo(400,300);
+			context.strokeStyle="black";
+			context.closePath();
+			context.stroke();
+
+			// draw a circle
+			context.beginPath();
+			context.strokeStyle="black";
+			context.arc(300,100,75,0,1.5*Math.PI,true);
+			context.stroke();
+
+			context.beginPath();
+			context.strokeStyle="black";
+			context.arc(400,250,75,0,1.5*Math.PI);
+			context.stroke();
+		}
+	</script>
+</body>
+</html>
