@@ -13,6 +13,13 @@ var balls=[];
 const colors=["black","red","green","yellow","blue","gray","pink"];
 
 window.onload=function(){
+	WINDOW_WIDTH=document.body.clientWidth;
+	WINDOW_HEIGHT=Math.max( window.innerHeight, document.body.clientHeight ); //something wrong with clientHeight in my mac
+
+	MARGIN_LEFT=Math.round(WINDOW_WIDTH/10);
+	RADIUS=Math.round(WINDOW_WIDTH*4/5/108)-1;
+
+	MARGIN_TOP=Math.round(WINDOW_HEIGHT/5);
 
 	var canvas=document.getElementById('canvas');
 			canvas.width=WINDOW_WIDTH;
@@ -72,10 +79,10 @@ function update() {
 			addBall(MARGIN_LEFT+54*(RADIUS+1),MARGIN_TOP,parseInt(curMinutes%10));
 		}
 
-		if (parseInt(curSeconds/10)!=parseInt(nextMinutes/10)) {
+		if (parseInt(curSeconds/10)!=parseInt(nextSeconds/10)) {
 			addBall(MARGIN_LEFT+78*(RADIUS+1),MARGIN_TOP,parseInt(curSeconds/10));
 		}
-		if (parseInt(curSeconds%10)!=parseInt(nextMinutes%10)) {
+		if (parseInt(curSeconds%10)!=parseInt(nextSeconds%10)) {
 			addBall(MARGIN_LEFT+93*(RADIUS+1),MARGIN_TOP,parseInt(curSeconds%10));
 		}
 		curShowTimeSeconds=nextShowTimeSeconds;
