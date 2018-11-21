@@ -8,7 +8,17 @@ var MARGIN_LEFT=30;
 const endTime=new Date(2018,10,22,9,52,30);
 var curShowTimeSeconds=0;
 
+var ball={
+	x:512,
+	y:100,
+	r:20,
+	g:2,
+	vx:-4,
+	vy:0,
+	color:"#005588",
+};
 window.onload=function(){
+
 	var canvas=document.getElementById('canvas');
 			canvas.width=WINDOW_WIDTH;
 			canvas.height=WINDOW_HEIGHT;
