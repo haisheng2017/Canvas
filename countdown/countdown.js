@@ -5,7 +5,7 @@ var RADIUS=8;
 var MARGIN_TOP=60;
 var MARGIN_LEFT=30;
 
-const endTime=new Date(2018,10,22,9,52,30);
+// const endTime=new Date(2018,10,22,9,52,30);	//remember that it only support two digits hours
 var curShowTimeSeconds=0;
 
 var balls=[];
@@ -46,10 +46,12 @@ window.onload=function(){
 function getCurrentShowTimeSeconds() {
 	// body...
 	var curTime=new Date();
-	var ret=endTime.getTime()-curTime.getTime();
-	ret=Math.round(ret/1000);
+	// var ret=endTime.getTime()-curTime.getTime();
+	// ret=Math.round(ret/1000);
+	var ret=curTime.getHours()*3600+curTime.getMinutes()*60+curTime.getSeconds();
 
-	return ret>0?ret:0;
+	// return ret>0?ret:0;
+	return ret;
 }
 
 function update() {
