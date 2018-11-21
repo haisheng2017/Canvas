@@ -4,6 +4,10 @@ var RADIUS=8;
 
 var MARGIN_TOP=60;
 var MARGIN_LEFT=30;
+
+const endTime=new Date(2018,10,22,9,52,30);
+var curShowTimeSeconds=0;
+
 window.onload=function(){
 	var canvas=document.getElementById('canvas');
 			canvas.width=WINDOW_WIDTH;
@@ -14,14 +18,55 @@ window.onload=function(){
 				alert('Not Support Canvas');
 			}
 	var context=canvas.getContext("2d");
+
+	curShowTimeSeconds=getCurrentShowTimeSeconds();
+
+	setInterval(
+		function(){
+			render(context);
+			update();
+		},
+		50
+		);
 	render(context);
+}
+
+function getCurrentShowTimeSeconds() {
+	// body...
+	var curTime=new Date();
+	var ret=endTime.getTime()-curTime.getTime();
+	ret=Math.round(ret/1000);
+
+	return ret>0?ret:0;
+}
+
+function update() {
+	// body...
+	var nextShowTimeSeconds=getCurrentShowTimeSeconds();
+
+	var nextHours=parseInt(nextShowTimeSeconds/3600);
+	var nextMinutes=parseInt((nextShowTimeSeconds-nextHours*3600)/60);
+	var nextSeconds=parseInt(nextShowTimeSeconds%60);
+
+	var curHours=parseInt(curShowTimeSeconds/3600);
+	var curMinutes=parseInt((curShowTimeSeconds-curHours*3600)/60);
+	var curSeconds=parseInt(curShowTimeSeconds%60);
+
+	if (nextSeconds!=curSeconds) {
+		curShowTimeSeconds=nextShowTimeSeconds;
+	}
 }
 
 function render(cxt) {
 	// body...
-	var hours=12;
-	var minutes=34;
-	var seconds=56;
+	cxt.clearRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+	// var hours=12;	//not support three digits
+	// var minutes=34;
+	// var seconds=56;
+	var hours=parseInt(curShowTimeSeconds/3600);
+	var minutes=parseInt((curShowTimeSeconds-hours*3600)/60);
+	var seconds=parseInt(curShowTimeSeconds%60);
+
 	renderDigit(MARGIN_LEFT,MARGIN_TOP,parseInt(hours/10),cxt);
 	renderDigit(MARGIN_LEFT+15*(RADIUS+1),MARGIN_TOP,parseInt(hours%10),cxt);
 
