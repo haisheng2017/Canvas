@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DrawStar</title>
+</head>
+<body style="height: 100%">
+	<canvas id="canvas" style="height: 100%">
+		当前浏览器不支持Canvas
+	</canvas>
+
+	<script type="text/javascript">
+		window.onload=function(){
+			var canvas=document.getElementById('canvas');
+			canvas.width=800;
+			canvas.height=800;
+			if (canvas.getContext("2d")) {
+				var context=canvas.getContext("2d");
+			}else{
+				alert('Not Support Canvas');
+			}
+			var context=canvas.getContext("2d");
+		
+			drawStar(context,100,300,400,400);
+		};
+
+		function drawStar(cxt,r,R,x,y,rot=0) {
+			// body...
+			cxt.beginPath();
+			for (var i = 0; i<5;i++){
+				cxt.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,
+					-Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
+				cxt.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,
+					-Math.sin((54+i*72-rot)/180*Math.PI)*r+y);
+			}
+			cxt.closePath();
+
+			cxt.fillStyle="#fb3";
+			cxt.strokeStyle="#fd5";
+			cxt.lineWidth=3;
+			cxt.lineJoin="round";
+			cxt.fill();
+			cxt.stroke();
+		}
+	</script>
+</body>
+</html>
