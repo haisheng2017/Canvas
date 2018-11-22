@@ -28,27 +28,41 @@
 				var x=Math.random()*canvas.width;
 				var y=Math.random()*canvas.height;
 				var a=Math.random()*360;
-				drawStar(context,r/2.0,r,x,y,a);
+				drawStar(context,r,x,y,a);
 			}
 		};
 
-		function drawStar(cxt,r,R,x,y,rot=0) {
+		function drawStar(cxt,R,x,y,rot=0) {
+			// body...
+			
+			//Graphic transformation
+			cxt.save();
+			cxt.translate(x,y);
+			cxt.rotate(rot/180*Math.PI)	//radian
+
+			cxt.scale(R,R);	//scale() will scale ALL attributes!
+			starPath(cxt);
+
+			cxt.fillStyle="#fb3";
+			// cxt.strokeStyle="#fd5";
+			// cxt.lineWidth=3;
+			// cxt.lineJoin="round";
+			cxt.fill();
+			// cxt.stroke();
+
+			cxt.restore();
+		}
+
+		function starPath(cxt) {
 			// body...
 			cxt.beginPath();
 			for (var i = 0; i<5;i++){
-				cxt.lineTo(Math.cos((18+i*72-rot)/180*Math.PI)*R+x,
-					-Math.sin((18+i*72-rot)/180*Math.PI)*R+y);
-				cxt.lineTo(Math.cos((54+i*72-rot)/180*Math.PI)*r+x,
-					-Math.sin((54+i*72-rot)/180*Math.PI)*r+y);
+				cxt.lineTo(Math.cos((18+i*72)/180*Math.PI),
+					-Math.sin((18+i*72)/180*Math.PI));
+				cxt.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,
+					-Math.sin((54+i*72)/180*Math.PI)*0.5);
 			}
 			cxt.closePath();
-
-			cxt.fillStyle="#fb3";
-			cxt.strokeStyle="#fd5";
-			cxt.lineWidth=3;
-			cxt.lineJoin="round";
-			cxt.fill();
-			cxt.stroke();
 		}
 	</script>
 </body>
