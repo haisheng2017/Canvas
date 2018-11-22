@@ -20,7 +20,16 @@
 			}
 			var context=canvas.getContext("2d");
 		
-			drawStar(context,100,300,400,400);
+			context.fillStyle="black";
+			context.fillRect(0,0,canvas.width,canvas.height);
+
+			for (var i = 0; i < 200; i++) {
+				var r=Math.random()*10+10;
+				var x=Math.random()*canvas.width;
+				var y=Math.random()*canvas.height;
+				var a=Math.random()*360;
+				drawStar(context,r/2.0,r,x,y,a);
+			}
 		};
 
 		function drawStar(cxt,r,R,x,y,rot=0) {
